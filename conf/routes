@@ -1,0 +1,106 @@
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                                            controllers.Assets.versioned(path="/public", file: Asset)
+
+GET         /                                                        controllers.UserController.register
+
+
+
+POST        /check/user/exists                                       controllers.UserController.checkUserExists
+
+GET         /activation/:tokenName/:id                               controllers.UserController.activationUser(tokenName: String, id:Long)
+
+GET         /authFailure                                             controllers.UserController.authFailure
+
+
+
+GET         /login/pl                                                controllers.UserController.polishLogin
+
+GET         /login/en                                                controllers.UserController.englishLogin
+
+GET         /login/es                                                controllers.UserController.spanishLogin
+
+GET         /register/pl                                             controllers.UserController.polishRegister
+
+GET         /register/en                                             controllers.UserController.englishRegister
+
+GET         /register/es                                             controllers.UserController.spanishRegister
+
+
+
+GET         /guest/register                                          controllers.UserController.register
+
+POST        /guest/register/submit                                   controllers.UserController.submitRegister
+
+GET         /guest/login                                             controllers.UserController.login
+
+POST        /guest/login/submit                                      controllers.UserController.submitLogin
+
+GET         /guest/doctors/get                                       controllers.UserController.doctors
+
+GET         /guest/doctor/:id/details                                controllers.UserController.doctor(id: Long)
+
+
+
+GET         /patient/edit                                            controllers.PatientController.edit
+
+POST        /patient/edit/submit                                     controllers.PatientController.submitEdit
+
+GET         /patient/doctor/visit/:id/add                            controllers.PatientController.addVisit(id: Long)
+
+POST        /patient/doctor/visit/add/submit                         controllers.PatientController.submitAddVisit
+
+GET         /patient/doctors/get                                     controllers.PatientController.doctors
+
+GET         /patient/doctor/:id/details                              controllers.PatientController.doctor(id: Long)
+
+GET         /patient/visits/get                                      controllers.PatientController.visits
+
+GET         /patient/visit/bill/:idPatient/:idDoctor/:idVisit        controllers.PatientController.billForVisit(idPatient: Long, idDoctor: Long,idVisit: Long)
+
+
+
+GET         /doctor/visit/list/add                                   controllers.DoctorController.addVisitList
+
+POST        /doctor/visit/list/add/submit                            controllers.DoctorController.submitAddVisitList
+
+GET         /doctor/visit/list/:id/delete                            controllers.DoctorController.deleteVisitList(id: Long)
+
+GET         /doctor/visit/:id/confirm                                controllers.DoctorController.confirmVisit(id: Long)
+
+GET         /doctor/edit                                             controllers.DoctorController.editDoctor
+
+POST        /doctor/edit/submit                                      controllers.DoctorController.submitEditDoctor
+
+GET         /doctor/visits/get                                       controllers.DoctorController.visits
+
+
+
+GET         /admin/patients/get                                      controllers.AdminController.patients
+
+GET         /admin/patient/:id/deactivation                          controllers.AdminController.patientDeactivation(id: Long)
+
+GET         /admin/patient/:id/activation                            controllers.AdminController.patientActivation(id: Long)
+
+GET         /admin/patient/:id/delete                                controllers.AdminController.deletePatient(id: Long)
+
+GET         /admin/specializations                                   controllers.AdminController.specializations()
+
+POST        /admin/specializations/add                               controllers.AdminController.addSpecialization
+
+POST        /admin/specializations/edit                              controllers.AdminController.editSpecialization
+
+GET         /admin/doctor/add                                        controllers.AdminController.addDoctor
+
+POST        /admin/doctor/add/submit                                 controllers.AdminController.submitAddDoctor
+
+GET         /admin/doctors/get                                       controllers.AdminController.doctors
+
+GET         /admin/doctor/:id/deactivation                           controllers.AdminController.doctorDeactivation(id: Long)
+
+GET         /admin/doctor/:id/activation                             controllers.AdminController.doctorActivation(id: Long)
+
+GET         /admin/doctor/:id/delete                                 controllers.AdminController.deleteDoctor(id: Long)
+
+GET         /admin/visits/get                                        controllers.AdminController.visits
+
+GET         /admin/visit/:id/delete                                  controllers.AdminController.deleteVisit(id: Long)

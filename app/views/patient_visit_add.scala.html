@@ -1,0 +1,63 @@
+@(medicalVisitsList: List[models.MedicalVisitList], doctor: Doctor, user: User)
+
+    @main("Zapis") {
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">Przychodnia Lekarska</div>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/patient/edit">Moje dane</a></li>
+                    <li><a href="/patient/visits/get">Moje wizyty</a></li>
+                    <li><a href="/patient/doctors/get">Nasi doktorzy</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <button type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-user"></span>
+                        @user.patient.firstName @user.patient.lastName</button>
+                    <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href = '/guest/login' "><span class="glyphicon glyphicon-log-out"></span>
+                        Wyloguj się</button>
+                </ul>
+            </div>
+            <div><header>
+                <img src="@routes.Assets.versioned("images/header2.jpg")" width="100%" height="100%">
+            </header></div>
+        </nav>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Zapis na wizytę</div>
+            <div class="panel-body">
+                <form action="@routes.PatientController.submitAddVisit" method="post">
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label for="doctor">Doktor: @doctor.firstName @doctor.lastName</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="specialization">Specializacja: @doctor.specialization.specializationName</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="doctor">Pacjent: @user.patient.firstName @user.patient.lastName</label>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <label for="date">Data wizyty:</label>
+                                </div>
+                                <div>
+                                    <select type="text" class="form-control" id="idVisit" name="idVisit" required>
+                                    @for(v <- medicalVisitsList) {
+                                        <option value="@v.id">@v.date.format("dd-MM-yyyy") @v.time.format("HH:mm")</option>
+                                    }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>
+                        Zapisz się</button>
+                </form>
+            </div>
+        </div>
+    }

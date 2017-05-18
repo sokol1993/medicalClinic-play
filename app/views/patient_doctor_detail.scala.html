@@ -1,0 +1,70 @@
+@(doctor: Doctor, user: User)
+
+    @main("Doktor") {
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">Przychodnia Lekarska</div>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/patient/edit">Moje dane</a></li>
+                    <li><a href="/patient/visits/get">Moje wizyty</a></li>
+                    <li><a href="/patient/doctors/get">Nasi doktorzy</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <button type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-user"></span>
+                        @user.patient.firstName @user.patient.lastName</button>
+                    <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href = '/guest/login' "><span class="glyphicon glyphicon-log-out"></span>
+                        Wyloguj się</button>
+                </ul>
+            </div>
+            <div><header>
+                <img src="@routes.Assets.versioned("images/header2.jpg")" width="100%" height="100%">
+            </header></div>
+        </nav>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Profil: @doctor.firstName @doctor.lastName</div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imię </th>
+                            <th>Nazwisko</th>
+                            <th>Specjalizacja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@doctor.firstName</td>
+                            <td>@doctor.lastName</td>
+                            <td>@doctor.specialization.specializationName</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h2>Godziny przyjęć</h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Poniedziałek</th>
+                            <th>Wtorek</th>
+                            <th>Środa</th>
+                            <th>Czwartek</th>
+                            <th>Piątek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@doctor.mondayHours</td>
+                            <td>@doctor.tuesdayHours</td>
+                            <td>@doctor.wednesdayHours</td>
+                            <td>@doctor.thursdayHours</td>
+                            <td>@doctor.fridayHours</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-default" onclick="window.location.href = '/patient/doctors/get'">Wróć</button>
+                <button class="btn btn-link" onclick="window.location.href = '/patient/doctor/visit/@doctor.id/add'">
+                    Wyznacz wizytę</button>
+            </div>
+        </div>
+    }

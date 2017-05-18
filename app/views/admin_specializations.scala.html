@@ -1,0 +1,58 @@
+@(specializations: List[models.Specialization], user: User)
+    @import scala.Predef; var x = 1
+
+    @main("Specializacje") {
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">Przychodnia Lekarska</div>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/admin/doctor/add">Dodaj doktora</a></li>
+                    <li><a href="/admin/doctors/get">Doktorzy</a></li>
+                    <li><a href="/admin/patients/get">Pacjenci</a></li>
+                    <li><a href="/admin/visits/get">Wizyty</a></li>
+                    <li><a href="/admin/specializations">Specializacje</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <button type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-user"></span>
+                        @user.username @user.username</button>
+                    <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href = '/guest/login' "><span class="glyphicon glyphicon-log-out"></span>
+                        Wyloguj się</button>
+                </ul>
+            </div>
+            <div><header>
+                <img src="@routes.Assets.versioned("images/header2.jpg")" width="100%" height="100%">
+            </header></div>
+        </nav>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Specializacje</div>
+            <div class="panel-body">
+                <table class="table table-bordered table-hover" id="specialization_table">
+                    <thead>
+                        <tr >
+                            <th class="text-center">
+                                ID
+                            </th>
+                            <th class="text-center">
+                                Nazwa
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(spec <- specializations) {
+
+                        <tr id="addr@x">
+                            <td id="idSpec@x">@spec.id</td>
+                            <td><input class="form-control" id="inputName@x" type="text" value="@spec.specializationName" disabled required/></td>
+                            <td><button id="edit@x" disabled class="btn btn-primary">Edytuj</button></td>
+                        </tr>
+                        @(x = x + 1)
+                    }
+                    </tbody>
+                </table>
+                <a id="add_row" class="btn btn-default pull-left">Dodaj specjalizację</a>
+            </div>
+        </div>
+    }

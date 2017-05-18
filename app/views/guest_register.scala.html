@@ -1,0 +1,104 @@
+@main(Messages("RegisterPage.UserRegister")) {
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">@Messages("MedicalClinic")</div>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/guest/doctors/get">@Messages("Doctors")</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <button class="btn btn-default navbar-btn" onclick="window.location.href = '/register/en' ">EN</button>
+                <button class="btn btn-default navbar-btn" onclick="window.location.href = '/register/es' ">ES</button>
+                <button class="btn btn-default navbar-btn" onclick="window.location.href = '/register/pl' ">PL</button>
+                <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href = '/guest/register' "><span class="glyphicon glyphicon-user"></span>
+                    @Messages("RegisterPage.RegisterIn")</button>
+                <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href = '/guest/login' "><span class="glyphicon glyphicon-log-in"></span>
+                    @Messages("LoginPage.Sign")</button>
+            </ul>
+        </div>
+        <div><header>
+            <img src="@routes.Assets.versioned("images/header2.jpg")" width="100%" height="100%">
+        </header></div>
+    </nav>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@Messages("RegisterPage.UserRegister")</div>
+        <div class="panel-body">
+            <form action="@routes.UserController.submitRegister" method="POST">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div><label for="username">@Messages("RegisterPage.Login")</label></div>
+                        <div id="user" class="form-group has-feedback">
+                            <div class="col-sm-16">
+                                <input type="text" class="form-control" placeholder="@Messages("RegisterPage.Login")" id="username" name="username" required minlength="5" onkeyup="checkname()">
+                                <span id="name_statusOk" class="glyphicon glyphicon-ok form-control-feedback" style="display: none"></span>
+                                <span id="name_statusError" class="glyphicon glyphicon-remove form-control-feedback" style="display: none"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">@Messages("RegisterPage.Password")</label>
+                            <input type="password" class="form-control" placeholder="@Messages("RegisterPage.Password")" id="password" name="password" required minlength="5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">@Messages("RegisterPage.Email")</label>
+                            <input type="email" class="form-control" placeholder="@Messages("RegisterPage.Email")" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstName">@Messages("RegisterPage.FirstName")</label>
+                            <input type="text" class="form-control" placeholder="@Messages("RegisterPage.FirstName")" id="firstName" name="firstName" pattern="[A-ZĄĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]*" title="Niepoprawne imię" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">@Messages("RegisterPage.LastName")</label>
+                            <input type="text" class="form-control" placeholder="@Messages("RegisterPage.LastName")" id="lastName" name="lastName" pattern="[A-ZĄĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]*" title="Niepoprawne nazwisko" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pesel">@Messages("RegisterPage.Pesel")</label>
+                            <input type="text" class="form-control" placeholder="@Messages("RegisterPage.Pesel")" id="pesel" name="pesel" required pattern="[0-9]{11}" title="Niepoprawny format numeru pesel!">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateOfBirth">@Messages("RegisterPage.DateOfBirth")</label>
+                            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label for="streetName">@Messages("RegisterPage.StreetName")</label>
+                            <input type="text" class="form-control" placeholder="@Messages("RegisterPage.StreetName")" id="streetName" name="streetName" pattern="[A-ZĄĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]*" title="Nieporawna ulica" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="streetNumber">@Messages("RegisterPage.StreetNumber")</label>
+                            <input type="text" class="form-control" placeholder="@Messages("RegisterPage.StreetNumber")" id="streetNumber" name="streetNumber" pattern="[0-9]*" title="Wpisz numer!" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="homeNumber">@Messages("RegisterPage.HomeNumber")</label>
+                            <input type="text" class="form-control" placeholder="@Messages("RegisterPage.HomeNumber")" id="homeNumber" name="homeNumber" pattern="[0-9]*" title="Wpisz numer!">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="postcode">@Messages("RegisterPage.Postcode")</label>
+                            <input type="text" class="form-control" placeholder="@Messages("RegisterPage.Postcode")" id="postcode" name="postcode" pattern="[0-9]{2}-[0-9]{3}" title="Wpisz w formacie NN-NNN" required>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">@Messages("RegisterPage.City")</label>
+                            <input type="text" class="form-control" placeholder="@Messages("RegisterPage.City")" id="city" name="city" pattern="[A-ZĄĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśźż]*" title="Niepoprawne miasto" required>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button id="subButt" type="submit" class="btn btn-primary">@Messages("RegisterPage.RegisterIn")</button>
+            </form>
+        </div>
+    </div>
+}

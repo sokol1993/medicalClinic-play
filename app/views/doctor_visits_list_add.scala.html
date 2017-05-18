@@ -1,0 +1,61 @@
+@(user: User)
+
+    @main("Dodawanie listy") {
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">Przychodnia Lekarska</div>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/doctor/edit">Moje dane</a></li>
+                    <li><a href="/doctor/visits/get">Moje wizyty</a></li>
+                    <li><a href="/doctor/visit/list/add">Stwórz zapisy</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <button type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-user"></span>
+                        @user.doctor.firstName @user.doctor.lastName</button>
+                    <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href = '/guest/login' "><span class="glyphicon glyphicon-log-out"></span>
+                        Wyloguj się</button>
+                </ul>
+            </div>
+            <div><header>
+                <img src="@routes.Assets.versioned("images/header2.jpg")" width="100%" height="100%">
+            </header></div>
+        </nav>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Tworzenie listy zapisów na wizytę</div>
+            <div class="panel-body">
+                <form action="@routes.DoctorController.submitAddVisitList" method="post">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="doctor">Doktor: @user.doctor.firstName @user.doctor.lastName</label>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <label for="number">Liczba miejsc:</label>
+                                </div>
+                                <div>
+                                    <input type="number" min="1" max="20" class="form-control" id="availableVisits" name="availableVisits" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <label for="date">Data wizyty:</label>
+                                </div>
+                                <div>
+                                    <input type="datetime-local" class="form-control" id="dateVisit" name="dateVisit" required>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>
+                        Zapisz się</button>
+                </form>
+            </div>
+        </div>
+
+
+    }

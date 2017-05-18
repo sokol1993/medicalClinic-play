@@ -1,0 +1,59 @@
+@(visit: MedicalVisit, user: User)
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Faktura VAT</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div align="left">
+            Sprzedawca:
+            <br>
+            Przychodnia Medyczna
+            <br>
+            ul. Janowa
+            <br>
+            99-021, Warszawa
+            <br>
+            <br>
+        </div>
+        <div align="right">
+            <br>
+            Nabywca:
+            <br>
+            @visit.patient.firstName @visit.patient.lastName
+            <br>
+                Pesel:
+            <br>
+            @visit.patient.pesel
+            <br>
+                Adres:
+            <br>
+            @visit.patient.streetName @visit.patient.streetNumber
+            <br>
+            @visit.patient.postcode, @visit.patient.city
+            <br>
+            <br>
+            <br>
+            </div>
+        <table border="1">
+            <tr>
+                <th>Data</th>
+                <th>Imie lekarza</th>
+                <th>Nazwisko lekarza</th>
+                <th>Specjalizacja</th>
+                <th>Tytulem</th>
+                <th>Cena wizyty</th>
+            </tr>
+            <tr>
+                <td>@visit.date</td>
+                <td>@visit.doctor.firstName</td>
+                <td>@visit.doctor.lastName</td>
+                <td>@visit.doctor.specialization.specializationName</td>
+                <td>Usługa medyczna</td>
+                <td>100,00 zl</td>
+            </tr>
+        </table>
+    </body>
+</html>

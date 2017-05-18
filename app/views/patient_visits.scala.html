@@ -1,0 +1,65 @@
+@(visits: List[models.MedicalVisit], user: User)
+
+    @main("Lista moich wizyt") {
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">Przychodnia Lekarska</div>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/patient/edit">Moje dane</a></li>
+                    <li><a href="/patient/visits/get">Moje wizyty</a></li>
+                    <li><a href="/patient/doctors/get">Nasi doktorzy</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <button type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-user"></span>
+                        @user.patient.firstName @user.patient.lastName</button>
+                    <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href = '/guest/login' "><span class="glyphicon glyphicon-log-out"></span>
+                        Wyloguj się</button>
+                </ul>
+            </div>
+            <div><header>
+                <img src="@routes.Assets.versioned("images/header2.jpg")" width="100%" height="100%">
+            </header></div>
+        </nav>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Lista moich wizyt</div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Ukończona</th>
+                            <th>Imię doktora</th>
+                            <th>Nazwisko doktora</th>
+                            <th>Specializacja doktora</th>
+                            <th>Faktura</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(visit <- visits) {
+                        <tr>
+                            <td>@visit.date.format("dd-MM-YYYY")</td>
+                            @if(visit.isCompleted) {
+                                <td>Tak</td>
+                            } else {
+                                <td>Nie</td>
+                            }
+                            <td>@visit.doctor.firstName</td>
+                            <td>@visit.doctor.lastName</td>
+                            <td>@visit.doctor.specialization.specializationName</td>
+                            @if(visit.isCompleted) {
+                                <td><button type="submit" onclick="location.href = '@routes.PatientController.billForVisit(user.patient.id,visit.doctor.id,visit.id)'" class="btn btn-link">
+                                    Faktura</button></td>
+                            } else {
+                                <td>Brak faktury</td>
+                            }
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    }

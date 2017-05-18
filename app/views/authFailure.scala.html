@@ -1,0 +1,29 @@
+@main(Messages("AuthFail.Error")) {
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">@Messages("MedicalClinic")</div>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/guest/doctors/get">@Messages("Doctors")</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <button class="btn btn-default navbar-btn" onclick="window.location.href = '/login/en' ">EN</button>
+                <button class="btn btn-default navbar-btn" onclick="window.location.href = '/login/es' ">ES</button>
+                <button class="btn btn-default navbar-btn" onclick="window.location.href = '/login/pl' ">PL</button>
+                <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href = '/guest/register' "><span class="glyphicon glyphicon-user"></span>
+                    @Messages("RegisterPage.RegisterIn")</button>
+                <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href = '/guest/login' "><span class="glyphicon glyphicon-log-in"></span>
+                    @Messages("LoginPage.Sign")</button>
+            </ul>
+        </div>
+        <div><header>
+            <img src="@routes.Assets.versioned("images/header2.jpg")" width="100%" height="100%">
+        </header></div>
+    </nav>
+
+    <div class="alert alert-danger">
+        <strong>@Messages("AuthFail.Main")</strong> @Messages("AuthFail.Try")
+    </div>
+}
